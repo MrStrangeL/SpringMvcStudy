@@ -13,6 +13,16 @@
         </init-param>
     </servlet>
 
+    <!-- 配置自定义的前置控制器 -->
+<!--    <servlet>-->
+<!--        <servlet-name>springmvcstudy</servlet-name>-->
+<!--        <servlet-class>com.springmvcstudy.define.MyDispatcherServlet</servlet-class>-->
+<!--        <init-param>-->
+<!--            <param-name>contextConfigLocation</param-name>-->
+<!--            <param-value>classpath:SpringMvcConfig.xml</param-value>-->
+<!--        </init-param>-->
+<!--    </servlet>-->
+
     <servlet-mapping>
         <servlet-name>springmvcstudy</servlet-name>
         <url-pattern>/</url-pattern>
