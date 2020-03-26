@@ -9,6 +9,32 @@
 <html>
 <head>
     <title>模拟Spring MVC运行机制</title>
+    <script src="${pageContext.request.contextPath}/js/jQuery-v3.4.1.js"></script>
+    <script type="text/javascript">
+        function init(){
+            var temp={
+                "userName":"test",
+                "userPwd":"123456"
+            };
+            $("#jsonType").val(JSON.stringify(temp));
+        }
+
+        function commit() {
+            var userRegister=JSON.parse($("#jsonType").val());
+            console.log(userRegister);
+            $.ajax({
+                url:"jsonType",
+                data:JSON.stringify(userRegister),
+                type:"post",
+                contentType: "application/json;charse=UTF-8",
+                dataType:"text",
+                success:function(data){
+                    var obj = eval("(" + data + ")");
+                    alert(obj.userName+"---"+obj.userPwd);
+                }
+            });
+        }
+    </script>
 </head>
 <body>
     <h1 style="text-align: center;color: red">Hello World!</h1>
@@ -49,5 +75,20 @@
         密  码3：<input type="password" name="users[2].userPwd">
         <input type="submit" value="登陆">
     </form>
+
+    <h3>Map类型数据绑定：</h3>
+    <form action="mapType" method="post">
+        用户名1：<input type="text" name="users['a'].userName">
+        密  码1：<input type="password" name="users['a'].userPwd">
+        用户名2：<input type="text" name="users['b'].userName">
+        密  码2：<input type="password" name="users['b'].userPwd">
+        用户名3：<input type="text" name="users['c'].userName">
+        密  码3：<input type="password" name="users['c'].userPwd">
+        <input type="submit" value="登陆">
+    </form>
+    <h3>JSON数据类型绑定</h3>
+    <input id="initJson" type="button" value="初始化" onclick="init()">
+    <input id="commit" type="button" value="提交" onclick="commit()">
+    <textarea id="jsonType" aria-multiline="true"></textarea>
 </body>
 </html>

@@ -1,9 +1,6 @@
 package com.springmvcstudy.controller;
 
-import com.springmvcstudy.entity.User;
-import com.springmvcstudy.entity.UserRegister;
-import com.springmvcstudy.entity.UserRegisterList;
-import com.springmvcstudy.entity.UserRegisterSet;
+import com.springmvcstudy.entity.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -134,5 +131,23 @@ public class AnnotationTestController {
             stringBuffer.append(userRegister).append("  ");
         }
         return stringBuffer.toString();
+    }
+
+    @RequestMapping(value="/mapType",method = RequestMethod.POST)
+    @ResponseBody
+    public String mapType(UserRegisterMap userRegisterMap){
+        StringBuffer stringBuffer=new StringBuffer();
+        for(String key:userRegisterMap.getUsers().keySet()){
+            stringBuffer.append(userRegisterMap.getUsers().get(key));
+        }
+        return stringBuffer.toString();
+    }
+
+    @RequestMapping(value = "/jsonType",method = RequestMethod.POST)
+    @ResponseBody
+    public UserRegister jsonType(@RequestBody UserRegister userRegister){
+        userRegister.setUserName("Server:"+userRegister.getUserName());
+        userRegister.setUserPwd("Server:"+userRegister.getUserPwd());
+        return userRegister;
     }
 }
