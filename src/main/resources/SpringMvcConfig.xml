@@ -64,6 +64,23 @@
         <property name="defaultErrorView" value="err.jsp"/>
     </bean>
 
+    <!-- 国际化资源文件 -->
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <!-- 表示多语言配置文件在根路径下，以language开头的文件-->
+        <property name="basename" value="classpath:language"/>
+        <property name="useCodeAsDefaultMessage" value="true"/>
+    </bean>
+
+    <!-- 拦截器 -->
+    <mvc:interceptors>
+        <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+            <property name="paramName" value="lang"/>
+        </bean>
+    </mvc:interceptors>
+
+    <!-- 配置SessionLocaleResolver，动态的获取Locale对象存入Session -->
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver"></bean>
+
 
 
     <!-- 配置自动扫描和自定义的视图解析器 -->

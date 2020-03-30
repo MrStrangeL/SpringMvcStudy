@@ -8,6 +8,8 @@ import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import java.util.List;
+import java.util.Map;
 
 @Data
 @NoArgsConstructor
@@ -24,4 +26,24 @@ public class UserJSR {
 
     @Pattern(regexp = "^[1][3,4,5,7,8][0-9]{9}$",message = "请输入正确的电话号码格式")
     private String phone;
+
+    private boolean flag;
+
+    private List<String> hobbyList;
+
+    private List<String> hobby;
+
+    private String sex;
+
+    private List<String> gradeList;
+
+    private String grade;
+
+    private Map<Integer,String> cityMap;
+
+    private Integer city;
+
+    private String introduce;
+
+    private String hidden;
 }
