@@ -19,6 +19,10 @@
         </mvc:message-converters>
     </mvc:annotation-driven>
 
+    <!-- 配置数据校验器Validator -->
+    <mvc:annotation-driven validator="userRegisterValidation"></mvc:annotation-driven>
+    <bean id="userRegisterValidation" class="com.springmvcstudy.validator.UserRegisterValidation"></bean>
+
     <!-- 配置数据类型转换器 -->
     <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
         <property name="converters">
@@ -44,6 +48,23 @@
     <!-- 配置对静态资源的引用 -->
     <mvc:resources mapping="/js/**" location="/js/"></mvc:resources>
     <mvc:resources mapping="/view/**" location="/view/"></mvc:resources>
+
+    <!-- 配置 CommonsMultipartResolver bean，id 必须是 multipartResolver -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 处理文件名中文乱码 -->
+        <property name="defaultEncoding" value="utf-8"/>
+        <!-- 设置多文件上传，总大小上限，不设置默认没有限制，单位为字节，1M=1*1024*1024 -->
+        <property name="maxUploadSize" value="104857600"/>
+        <!-- 设置每个上传文件的大小上限 -->
+        <property name="maxUploadSizePerFile" value="104857600"/>
+    </bean>
+
+    <!-- 设置异常解析器 -->
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="defaultErrorView" value="err.jsp"/>
+    </bean>
+
+
 
     <!-- 配置自动扫描和自定义的视图解析器 -->
 <!--    <context:component-scan base-package="com.springmvcstudy.define"></context:component-scan>-->
